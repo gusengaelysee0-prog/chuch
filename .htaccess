@@ -1,0 +1,27 @@
+# Enable URL rewriting for the chuch site
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /chuch/
+
+# Redirect legacy .html URLs to their .php equivalents when the PHP file exists.
+RewriteCond %{REQUEST_URI} \.html$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)\.html$ $1.php [R=301,L]
+
+# Rewrite sitemap.xml to the dynamic sitemap generator.
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# Allow extensionless PHP URLs when the .php file exists.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
+
+# Use index.php as the default document.
+DirectoryIndex index.php
+
+# Security: prevent directory listings and block access to sensitive paths.
+Options -Indexes
+RewriteRule ^backend/config/ - [F,L]
+RewriteRule ^\.ht - [F,L]

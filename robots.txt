@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /backend/
+Disallow: /login.php
+Disallow: /admin.php
+Sitemap: /chuch/sitemap.xml
